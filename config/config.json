@@ -1,23 +1,23 @@
 {
-  "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  }
+    "development": {
+        "username": "prasetion",
+        "password": "123456",
+        "database": "binar_db",
+        "host": "localhost",
+        "dialect": "postgres"
+    },
+    "test": {
+        "username": "prasetion",
+        "password": "123456",
+        "database": "binar_db",
+        "host": "localhost",
+        "dialect": "postgres"
+    },
+    "production": {
+        "username": "prasetion",
+        "password": "123456",
+        "database": "binar_db",
+        "host": "localhost",
+        "dialect": "postgres"
+    }
 }

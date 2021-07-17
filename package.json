@@ -1,24 +1,27 @@
 {
-  "name": "BinarChapter6",
-  "version": "1.0.0",
-  "description": "challenge binar chapter 6",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prasetion/BinarChapter6.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/prasetion/BinarChapter6/issues"
-  },
-  "homepage": "https://github.com/prasetion/BinarChapter6#readme",
-  "dependencies": {
-    "pg": "^8.6.0",
-    "sequelize": "^6.6.5"
-  }
+    "name": "BinarChapter6",
+    "version": "1.0.0",
+    "description": "challenge binar chapter 6",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "app": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/prasetion/BinarChapter6.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/prasetion/BinarChapter6/issues"
+    },
+    "homepage": "https://github.com/prasetion/BinarChapter6#readme",
+    "dependencies": {
+        "ejs": "^3.1.6",
+        "express": "^4.17.1",
+        "pg": "^8.6.0",
+        "sequelize": "^6.6.5"
+    }
 }

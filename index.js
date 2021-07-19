@@ -1,7 +1,16 @@
+  const { response } = require("express")
   const express = require("express")
   const app = express()
   const port = 3000
-  const user = require("./api/user")
+      //   const api = require("./api/user")
+
+  //   route
+  const score = require("./api/score")
+
+  //   model
+  const { user_game } = require('./models')
+
+  let loginState = false;
 
   // set view engine
   app.set('view engine', 'ejs');
@@ -12,30 +21,52 @@
   app.use(express.urlencoded({ extended: false }))
 
   // api
-  app.use("/api/v1", user)
+  //   app.use("/api/v1", api)
 
-  // home
-  app.get("/", (request, response) => response.render("index"))
+  //   score
+  app.use("/dashboard/score", score)
 
-  // app.post('/login', (req, res) => {
-  //     const { username, password } = req.body;
-  //     const user = users.find(i => {
-  //         return i.username == username && i.password == password
-  //     });
+  // login
+  app.get("/login", (request, response) => {
+      loginState = false;
+      response.render("login")
+  })
 
-  //     console.log(user);
+  app.post('/login', (req, res) => {
+      const { username, password } = req.body;
+      user_game.findOne({
+          where: { user_name: username, user_pass: password, admin: true }
+      }).then(result => {
+          if (result) {
+              console.log("success login");
+              loginState = true;
+              res.redirect('/dashboard')
+              return;
+          } else {
+              console.log("fail login");
+              loginState = false;
+              res.render('login', {
+                  message: 'Invalid username or password',
+              });
+          }
+      })
 
-  //     if (user) {
-  //         console.log("success login");
-  //         res.redirect('/');
-  //         return;
-  //     } else {
-  //         console.log("fail login");
-  //         res.render('login', {
-  //             message: 'Invalid username or password',
-  //         });
-  //     }
-  // });
+  });
+
+  //   dashboard
+  app.get("/dashboard", (req, res) => {
+      if (loginState)
+          user_game.findAll({
+              where: { admin: false }
+          }).then(result => {
+              res.render("dashboard", {
+                  result
+              })
+          });
+
+      else
+          res.redirect('/login');
+  })
 
   // kalau misal endpoint gak ada
   app.use(function(req, res) {

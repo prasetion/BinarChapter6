@@ -1,0 +1,1 @@
+INSERT INTO user_game (user_id, user_name, user_pass, admin) values (uuid_generate_v4(), 'prasetion', '123456', true)

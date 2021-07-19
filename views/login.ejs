@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Login Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../public/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="../public/css/signin.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+
+
+    <form class="form-signin" action="/login" method="POST">
+        <svg class="mb-4" alt="" width="72" height="72" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>
+
+        <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
+
+        <% if (locals.message) { %>
+            <div class="alert alert-danger" role="alert">
+                <%= message %>
+            </div>
+            <% }%>
+
+
+                <label for="inputUsername" class="sr-only">username</label>
+                <input type="username" id="inputUsername" class="form-control" placeholder="username" required="" autofocus="" name="username">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="password" required="" name="password">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                <a class="btn btn-lg btn-danger btn-block" href="/"> Back</a>
+    </form>
+</body>
+
+</html>

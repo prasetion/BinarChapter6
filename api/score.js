@@ -1,24 +1,41 @@
-const express = require('express')
-const router = express.Router()
-const app = express();
-
-//   model
-const { user_history } = require('../models')
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-
-// all score
-router.get('/', function(req, res) {
-    user_history.findAll()
-        .then(result => {
-            console.log(result);
-            res.render('score', {
-                result
-            });
-        })
-})
-
+'use strict';
+module.exports = {
+    up: async(queryInterface, Sequelize) => {
+        await queryInterface.createTable('user_histories', {
+            id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: Sequelize.INTEGER
+            },
+            game: {
+                type: Sequelize.STRING
+            },
+            score: {
+                type: Sequelize.INTEGER
+            },
+            user_id: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'user_games',
+                    key: 'id'
+                }
+            },
+            createdAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            }
+        });
+    },
+    down: async(queryInterface, Sequelize) => {
+        await queryInterface.dropTable('user_histories');
+    }
+};
 // get score by id
 router.get('/filter', (req, res) => {
     res.render("filter", result);

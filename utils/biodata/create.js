@@ -4,7 +4,7 @@ user_biodata.create({
         gender: "male",
         email: "admin@gmail.com",
         phone: 08126738,
-        user_id: 1
+        user_id: 2
     })
     .then(user_history => {
         console.log(user_history)

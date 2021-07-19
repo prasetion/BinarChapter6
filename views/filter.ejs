@@ -17,19 +17,18 @@
 <body>
     <main>
         <%- include("layouts/sidebar")  %>
-
             <div class="container mt-5">
-                <ul class="list-group">
-                    <% result.forEach(x => { %>
-                        <li class="list-group-item">
-                            <%= x.game %>
-                                <%= x.score %>
-                        </li>
+                <form action="/dashboard/filter" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputUsername">Type username to search score</label>
+                            <input type="username" class="form-control" id="inputUsername" placeholder="Username" name="username">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
+                </form>
 
-                        <% }) %>
-                </ul>
             </div>
-
     </main>
 </body>
 

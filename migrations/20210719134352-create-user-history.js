@@ -16,7 +16,6 @@ module.exports = {
             },
             user_id: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
                 references: {
                     model: 'user_games',
                     key: 'id'

@@ -4,8 +4,9 @@
   const port = 3000
 
   //   route
-  const score = require("./api/score")
-  const user = require("./api/user")
+  const score = require("./routes/score")
+  const user = require("./routes/user")
+  const api = require("./api/api")
 
   //   model
   const db = require("./models")
@@ -19,9 +20,9 @@
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
 
-  //   score
   app.use("/dashboard/score", score)
   app.use("/dashboard/register", user)
+  app.use("/api/v1/users", api)
 
   // login
   app.get("/login", (request, response) => {
@@ -91,7 +92,6 @@
           })
 
       });
-
 
   })
 

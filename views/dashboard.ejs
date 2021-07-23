@@ -65,8 +65,17 @@
                                     <%= x.user_biodatum.email %>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <div class="row">
+                                        <div class="col align-items-center">
+                                            <button type="button" class="btn btn-primary">Edit</button>
+                                        </div>
+                                        <div class="col">
+                                            <form action="/dashboard/register/delete/<%= x.id %>" method="POST">
+                                                <input type="hidden" id="id" name="fullname" value="<%= x.id %>">
+                                                <button type="submit" class="btn btn-danger">Delete</button></a>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             <% }) %>

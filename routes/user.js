@@ -52,13 +52,26 @@ router.put("/:id", (req, res) => {
 })
 
 // delete user
-router.delete("/:id", (req, res) => {
-    user_game.destroy({
+router.post("/delete/:id", (req, res) => {
+    db.user_biodata.destroy({
             where: {
                 id: req.params.id
             }
         })
-        .then(() => console.log("sudah dihapus"))
+        .then(() => {
+            console.log("biodata sudah dihapus")
+
+            db.user_game.destroy({
+                where: {
+                    id: req.params.id
+                }
+            }).then(() => {
+                console.log("username sudah dihapus");
+            });
+
+        })
+
+    res.redirect("/dashboard")
 })
 
 module.exports = router

@@ -43,16 +43,29 @@ router.post('/', (req, res) => {
 // changing data user
 router.put("/:id", (req, res) => {
     db.user_game.update({
-            title: req.body.title,
-            body: req.body.body,
-            approved: req.body.approved
+            user_name: req.body.username,
+            user_pass: req.body.password,
+            admin: false
         }, {
             where: { id: req.params.id }
         })
-        .then(result => {
-            res.status(201).json(result)
-        }).catch(err => {
-            res.status(422).json("Can't create user")
+        .then(user => {
+            db.user_biodata.update({
+                    full_name: req.body.fullname,
+                    gender: req.body.gender,
+                    email: req.body.email,
+                    phone: req.body.phone
+                }, {
+                    where: { userGameId: req.params.id }
+                })
+                .then(result => {
+                    console.log(result);
+                    console.log("user game sudah diupdate")
+                    res.status(200).json({
+                        message: `success update user`
+                    })
+                })
+
         })
 })
 

@@ -50,20 +50,49 @@
 
   });
 
+  let allUsers = [];
+
   //   dashboard
   app.get("/dashboard", (req, res) => {
-      if (loginState)
-          db.user_game.findAll({
-              where: { admin: false },
-              include: [db.user_history, db.user_biodata]
-          }).then(result => {
-              res.render("dashboard", {
-                  result
-              })
+      //   if (loginState)
+      db.user_game.findAll({
+          where: { admin: false },
+          include: [db.user_history, db.user_biodata]
+      }).then(result => {
+          allUsers = Array.from(result);
+          res.render("dashboard", {
+              allUsers
+          })
+      });
+
+      //   else
+      //       res.redirect('/login');
+  })
+
+  //   dashboard
+  app.post("/dashboard", (req, res) => {
+
+      db.user_game.findAll({
+          include: [db.user_history, db.user_biodata]
+      }).then(result => {
+
+          let users = [];
+
+          result.forEach(user => {
+              if (req.body.fullname === user.user_biodatum.full_name) {
+                  users.push(user);
+                  console.log("add user " + user.user_name);
+              }
           });
 
-      else
-          res.redirect('/login');
+          allUsers = Array.from(users);
+          res.render("dashboard", {
+              allUsers
+          })
+
+      });
+
+
   })
 
   //   //   test

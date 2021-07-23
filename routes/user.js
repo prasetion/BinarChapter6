@@ -35,19 +35,41 @@ router.post('/', (req, res) => {
     });
 })
 
-// changing data user
-router.put("/:id", (req, res) => {
-    user_game.update({
-            title: req.body.title,
-            body: req.body.body,
-            approved: req.body.approved
+// find data user
+router.post("/find/:id", (req, res) => {
+    db.user_game.findOne({
+            where: { id: req.params.id },
+            include: [db.user_history, db.user_biodata]
+        })
+        .then(result => {
+            res.render("edit", { result })
+        })
+})
+
+// find data user
+router.post("/edit/:id", (req, res) => {
+    db.user_game.update({
+            user_name: req.body.username,
+            user_pass: req.body.password,
+            admin: false
         }, {
             where: { id: req.params.id }
         })
-        .then(result => {
-            res.status(201).json(result)
-        }).catch(err => {
-            res.status(422).json("Can't create user")
+        .then(user => {
+            db.user_biodata.update({
+                    full_name: req.body.fullname,
+                    gender: req.body.gender,
+                    email: req.body.email,
+                    phone: req.body.phone
+                }, {
+                    where: { userGameId: req.params.id }
+                })
+                .then(result => {
+                    console.log(result);
+                    console.log("user game sudah diupdate")
+                    res.redirect("/dashboard")
+                })
+
         })
 })
 

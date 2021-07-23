@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Dashboard Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../public/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/index.css">
+    <link rel="stylesheet" href="../public/css/sidebars.css">
+
+</head>
+
+<body>
+    <main>
+        <%- include("layouts/sidebar")  %>
+            <div class="container mt-5">
+                <form action="/dashboard" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputUsername">Type username to search user</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="fullname" class="form-control mh-100" id="inputFullname" placeholder="input full name" name="fullname">
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% allUsers.forEach(x => { %>
+
+                            <tr>
+                                <td>
+                                    <%= x.user_name %>
+                                </td>
+                                <td>
+                                    <%= x.user_biodatum.full_name %>
+                                </td>
+                                <td>
+                                    <%= x.user_biodatum.gender %>
+                                </td>
+                                <td>
+                                    <%= x.user_biodatum.email %>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col align-items-center">
+                                            <form action="/dashboard/register/find/<%= x.id %>" method="POST">
+                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                            </form>
+                                        </div>
+                                        <div class="col">
+                                            <form action="/dashboard/register/delete/<%= x.id %>" method="POST">
+                                                <input type="hidden" id="id" name="fullname" value="<%= x.id %>">
+                                                <button type="submit" class="btn btn-danger">Delete</button></a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+
+            </div>
+    </main>
+</body>
+
+</html>

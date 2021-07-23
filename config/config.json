@@ -1,0 +1,23 @@
+{
+    "development": {
+        "username": "prasetion",
+        "password": "123456",
+        "database": "binar_db",
+        "host": "localhost",
+        "dialect": "postgres"
+    },
+    "test": {
+        "username": "prasetion",
+        "password": "123456",
+        "database": "binar_db",
+        "host": "localhost",
+        "dialect": "postgres"
+    },
+    "production": {
+        "username": "prasetion",
+        "password": "123456",
+        "database": "binar_db",
+        "host": "localhost",
+        "dialect": "postgres"
+    }
+}

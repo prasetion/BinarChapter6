@@ -7,7 +7,6 @@
   //   route
   const score = require("./api/score")
   const user = require("./api/user")
-  const filter = require("./api/filter")
 
   //   model
   const { user_game } = require('./models')
@@ -27,7 +26,6 @@
 
   //   score
   app.use("/dashboard/score", score)
-  app.use("/dashboard/filter", filter)
   app.use("/dashboard/register", user)
 
   // login

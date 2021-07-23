@@ -19,7 +19,27 @@
         <%- include("layouts/sidebar")  %>
 
             <div class="container mt-5">
-                <ul class="list-group">
+                <form action="/dashboard/filter" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputUsername">Type username to search score</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="username" class="form-control mh-100" id="inputUsername" placeholder="Username" name="username">
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <ul class="list-group mt-3">
                     <% result.forEach(x => { %>
                         <li class="list-group-item">
                             <%= x.game %>

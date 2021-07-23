@@ -18,10 +18,33 @@
     <main>
         <%- include("layouts/sidebar")  %>
             <div class="container mt-5">
-                <table class="table table-bordered">
+                <form action="/dashboard/filter" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="inputUsername">Type username to search user</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="username" class="form-control mh-100" id="inputUsername" placeholder="Username" name="username">
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-bordered mt-3">
                     <thead>
                         <tr>
                             <th scope="col">User Name</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>

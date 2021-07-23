@@ -28,4 +28,26 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/:user_name', (req, res) => {
+    // user_history.hasMany(user_biodata, { foreignKey: "user_id" });
+    // user_biodata.belongsTo(user_history)
+    // user_history.findAll({
+    //     include: [{
+    //         model: user_history,
+    //         required: true
+    //     }]
+    // }).then(result => {
+    //     console.log(result);
+    // })
+
+    user_history.findAll({
+        where: { user_name: req.params.user_name }
+    }).then(result => {
+        console.log(result);
+        res.render("score", {
+            result
+        })
+    })
+})
+
 module.exports = router;

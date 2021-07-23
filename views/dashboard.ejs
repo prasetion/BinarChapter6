@@ -55,11 +55,16 @@
                                 <td>
                                     <%= x.user_name %>
                                 </td>
-                                <td>full name</td>
-                                <td>gender</td>
-                                <td>email</td>
                                 <td>
-                                    <button type="button" class="btn btn-success">View Profile</button>
+                                    <%= x.user_biodatum.full_name %>
+                                </td>
+                                <td>
+                                    <%= x.user_biodatum.gender %>
+                                </td>
+                                <td>
+                                    <%= x.user_biodatum.email %>
+                                </td>
+                                <td>
                                     <button type="button" class="btn btn-primary">Edit</button>
                                     <button type="button" class="btn btn-danger">Delete</button>
                                 </td>

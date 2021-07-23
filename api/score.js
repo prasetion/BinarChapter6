@@ -2,52 +2,61 @@ const express = require('express')
 const router = express.Router()
 const app = express();
 
-const { user_biodata } = require("../models")
-const { user_history } = require("../models")
+const db = require("../models")
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 router.get('/', (req, res) => {
-    // user_history.hasMany(user_biodata, { foreignKey: "user_id" });
-    // user_biodata.belongsTo(user_history)
-    // user_history.findAll({
-    //     include: [{
-    //         model: user_history,
-    //         required: true
-    //     }]
-    // }).then(result => {
-    //     console.log(result);
-    // })
+    db.user_game.findAll({
+        include: [db.user_history, db.user_biodata]
+    }).then(result => {
 
-    user_history.findAll().then(result => {
-        console.log(result);
+        let scores = [];
+        let allPlayerName = [];
+
+        result.forEach(score => {
+            const full_name = score.user_biodatum.full_name;
+            for (let index = 0; index < score.user_histories.length; index++) {
+                let item = score.user_histories[index];
+                scores.push(item);
+                allPlayerName.push(full_name);
+            }
+        });
+
         res.render("score", {
-            result
+            scores,
+            allPlayerName
         })
-    })
+
+    });
 })
 
-router.post('/:user_name', (req, res) => {
-    // user_history.hasMany(user_biodata, { foreignKey: "user_id" });
-    // user_biodata.belongsTo(user_history)
-    // user_history.findAll({
-    //     include: [{
-    //         model: user_history,
-    //         required: true
-    //     }]
-    // }).then(result => {
-    //     console.log(result);
-    // })
-
-    user_history.findAll({
-        where: { user_name: req.params.user_name }
+router.post('/', (req, res) => {
+    db.user_game.findAll({
+        include: [db.user_history, db.user_biodata]
     }).then(result => {
-        console.log(result);
+
+        let scores = [];
+        let allPlayerName = [];
+
+        result.forEach(score => {
+            const full_name = score.user_biodatum.full_name;
+            if (req.body.playername == full_name) {
+                for (let index = 0; index < score.user_histories.length; index++) {
+                    let item = score.user_histories[index];
+                    scores.push(item);
+                    allPlayerName.push(full_name);
+                }
+            }
+        });
+
         res.render("score", {
-            result
+            scores,
+            allPlayerName
         })
-    })
+
+    });
 })
 
 module.exports = router;

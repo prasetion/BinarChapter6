@@ -2,15 +2,13 @@
   const express = require("express")
   const app = express()
   const port = 3000
-      //   const api = require("./api/user")
 
   //   route
   const score = require("./api/score")
   const user = require("./api/user")
 
   //   model
-  const { user_game } = require('./models')
-
+  const db = require("./models")
   let loginState = false;
 
   // set view engine
@@ -20,9 +18,6 @@
 
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
-
-  // api
-  //   app.use("/api/v1", api)
 
   //   score
   app.use("/dashboard/score", score)
@@ -36,7 +31,7 @@
 
   app.post('/login', (req, res) => {
       const { username, password } = req.body;
-      user_game.findOne({
+      db.user_game.findOne({
           where: { user_name: username, user_pass: password, admin: true }
       }).then(result => {
           if (result) {
@@ -58,8 +53,9 @@
   //   dashboard
   app.get("/dashboard", (req, res) => {
       if (loginState)
-          user_game.findAll({
-              where: { admin: false }
+          db.user_game.findAll({
+              where: { admin: false },
+              include: [db.user_history, db.user_biodata]
           }).then(result => {
               res.render("dashboard", {
                   result
@@ -68,6 +64,19 @@
 
       else
           res.redirect('/login');
+  })
+
+  //   //   test
+  app.get("/test", (req, res) => {
+      db.user_game.findAll({
+          where: {
+              admin: false
+          },
+          include: [db.user_history, db.user_biodata]
+      }).then(result => {
+          res.send(result);
+          console.log(result);
+      })
   })
 
   // kalau misal endpoint gak ada

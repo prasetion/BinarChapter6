@@ -19,17 +19,17 @@
         <%- include("layouts/sidebar")  %>
 
             <div class="container mt-5">
-                <form action="/dashboard/filter" method="POST">
+                <form action="/dashboard/score" method="POST">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <div class="row">
                                 <div class="col">
-                                    <label for="inputUsername">Type username to search score</label>
+                                    <label for="inputPlayerName">Type player name to search score</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <input type="username" class="form-control mh-100" id="inputUsername" placeholder="Username" name="username">
+                                    <input type="playername" class="form-control mh-100" id="inputPlayerName" placeholder="Player Name" name="playername">
                                 </div>
                                 <div class="col">
                                     <button type="submit" class="btn btn-primary btn-lg btn-block">Search</button>
@@ -39,15 +39,31 @@
                     </div>
                 </form>
 
-                <ul class="list-group mt-3">
-                    <% result.forEach(x => { %>
-                        <li class="list-group-item">
-                            <%= x.game %>
-                                <%= x.score %>
-                        </li>
+                <table class="table table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Game</th>
+                            <th scope="col">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for( let i = 0; i < scores.length; i++ ) { %>
 
-                        <% }) %>
-                </ul>
+                            <tr>
+                                <td>
+                                    <%= allPlayerName[i] %>
+                                </td>
+                                <td>
+                                    <%= scores[i].game %>
+                                </td>
+                                <td>
+                                    <%= scores[i].score %>
+                                </td>
+                            </tr>
+                            <% } %>
+                    </tbody>
+                </table>
             </div>
 
     </main>

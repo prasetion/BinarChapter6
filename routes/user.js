@@ -89,11 +89,11 @@ router.post("/delete/:id", (req, res) => {
                 }
             }).then(() => {
                 console.log("username sudah dihapus");
+                res.render("delete");
             });
 
         })
 
-    res.redirect("/dashboard")
 })
 
 module.exports = router

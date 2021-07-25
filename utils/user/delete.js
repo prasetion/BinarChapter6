@@ -1,7 +1,7 @@
-const { user_game } = require('../models')
-user_game.destroy({
+const db = require('../../models')
+db.user_game.destroy({
         where: {
-            admin: false
+            id: 2
         }
     })
     .then(() => console.log("yang bukan admin sudah dihapus"))
